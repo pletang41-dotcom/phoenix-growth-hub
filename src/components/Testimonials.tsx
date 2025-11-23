@@ -1,105 +1,69 @@
-import { useState } from "react";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Star } from 'lucide-react';
 
-const Testimonials = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const testimonials = [
+  {
+    id: 1,
+    quote: "We added $40k in new revenue in the first 30 days. The AI follow-up system is relentless but polite.",
+    author: "Dr. Sarah Jenkins",
+    role: "Owner, Radiant Smiles",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+  },
+  {
+    id: 2,
+    quote: "Finally, I can focus on training clients instead of chasing payments and confirming sessions. Life saver.",
+    author: "Mike Ross",
+    role: "Founder, IronClad Fitness",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+  },
+  {
+    id: 3,
+    quote: "The booking rate went from 15% to 45% within a week of installing the Phoenix Protocol.",
+    author: "Elena Fisher",
+    role: "Director, Luxe MedSpa",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+  }
+];
 
-  const testimonials = [
-    {
-      name: "Dr. Sarah Mitchell",
-      role: "Med Spa Owner, Los Angeles",
-      content:
-        "Phoenix transformed our booking process completely. We went from 15 appointments per week to 45+ in just 8 weeks. The AI system handles everything while we focus on providing great service.",
-      rating: 5,
-    },
-    {
-      name: "Marcus Johnson",
-      role: "Fitness Studio Owner, Miami",
-      content:
-        "The ShowUp Shield alone paid for itself in the first month. Our no-show rate dropped from 30% to under 5%. This system is a game-changer for service businesses.",
-      rating: 5,
-    },
-    {
-      name: "Dr. Emily Chen",
-      role: "Dental Practice, Seattle",
-      content:
-        "I was skeptical about AI marketing, but Phoenix made it so easy. The Reputation Loop has tripled our 5-star reviews and referrals. Best investment we've made for practice growth.",
-      rating: 5,
-    },
-  ];
-
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
+const Testimonials: React.FC = () => {
   return (
-    <section id="testimonials" className="py-20 bg-background">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-            Trusted by <span className="text-primary">Service Leaders</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            See how businesses like yours are growing with Phoenix
-          </p>
+    <section id="testimonials" className="py-24 bg-white border-t border-gray-100 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-phoenix-slate mb-4">Results Speak Louder</h2>
+          <p className="text-gray-600">Trusted by growth-minded service businesses across the globe.</p>
+        </div>
+        
+        <div className="flex flex-col md:flex-row gap-6 overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar">
+          {testimonials.map((t) => (
+            <motion.div 
+              key={t.id}
+              whileHover={{ y: -10 }}
+              className="snap-center min-w-[300px] md:min-w-[400px] bg-gray-50 border border-gray-200 p-8 rounded-2xl relative shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="flex gap-1 mb-4 text-phoenix-gold">
+                {[1,2,3,4,5].map(s => <Star key={s} size={16} fill="currentColor" />)}
+              </div>
+              <p className="text-lg text-gray-700 italic mb-6">"{t.quote}"</p>
+              <div className="flex items-center mt-auto">
+                <img src={t.image} alt={t.author} className="w-12 h-12 rounded-full mr-4 object-cover" />
+                <div>
+                  <p className="text-phoenix-slate font-bold text-sm">{t.author}</p>
+                  <p className="text-phoenix-goldDark text-xs font-medium">{t.role}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        <div className="max-w-4xl mx-auto relative">
-          <div className="bg-card border border-border rounded-2xl p-8 md:p-12 shadow-subtle">
-            {/* Stars */}
-            <div className="flex gap-1 mb-6 justify-center">
-              {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                <Star key={i} className="h-6 w-6 fill-primary text-primary" />
-              ))}
+        <div className="mt-16 pt-8 border-t border-gray-100">
+            <p className="text-center text-gray-400 text-sm mb-6 uppercase tracking-widest font-semibold">Powering Systems For</p>
+            <div className="flex justify-center flex-wrap gap-8 md:gap-16 opacity-60 grayscale">
+                {['Align Technology', 'MindBody', 'Salesforce', 'HubSpot', 'Twilio'].map((logo) => (
+                    <span key={logo} className="text-xl font-bold text-gray-400">{logo}</span>
+                ))}
             </div>
-
-            {/* Content */}
-            <blockquote className="text-xl md:text-2xl text-center mb-8 leading-relaxed text-foreground">
-              "{testimonials[currentIndex].content}"
-            </blockquote>
-
-            {/* Author */}
-            <div className="text-center">
-              <div className="font-bold text-lg">{testimonials[currentIndex].name}</div>
-              <div className="text-muted-foreground">{testimonials[currentIndex].role}</div>
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <div className="flex justify-center items-center gap-4 mt-8">
-            <button
-              onClick={prevTestimonial}
-              className="p-3 rounded-full border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-smooth"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-
-            <div className="flex gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`h-2 rounded-full transition-all ${
-                    index === currentIndex ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30"
-                  }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={nextTestimonial}
-              className="p-3 rounded-full border border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-smooth"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
         </div>
       </div>
     </section>

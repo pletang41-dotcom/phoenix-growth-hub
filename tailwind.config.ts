@@ -56,6 +56,15 @@ export default {
           DEFAULT: "hsl(var(--charcoal))",
           light: "hsl(var(--charcoal-light))",
         },
+        phoenix: {
+          gold: '#D4AF37',
+          goldLight: '#F9E076',
+          goldDark: '#AA8C2C',
+          slate: '#1E293B',
+          charcoal: '#121212',
+          gray: '#334155',
+          lightGray: '#F8FAFC',
+        }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
