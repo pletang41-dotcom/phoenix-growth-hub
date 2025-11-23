@@ -41,7 +41,12 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Contact</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li className="flex items-center"><Mail size={16} className="mr-2"/> hello@phoenix.digital</li>
+              <li className="flex items-center">
+                <Mail size={16} className="mr-2"/>
+                <a href="mailto:info@phoenixdigitalconsultancy.com" className="hover:text-phoenix-gold">
+                  info@phoenixdigitalconsultancy.com
+                </a>
+              </li>
               <li>123 Innovation Dr, Suite 400<br/>Austin, TX 78701</li>
             </ul>
           </div>
